@@ -41,10 +41,6 @@ Adafruit_MQTT_Client mqtt(&client, MQTT_SERV, MQTT_PORT, MQTT_NAME, MQTT_PASS);
 Adafruit_MQTT_Subscribe onoff2 = Adafruit_MQTT_Subscribe(&mqtt, MQTT_NAME FEED1);
 Adafruit_MQTT_Subscribe onoff3 = Adafruit_MQTT_Subscribe(&mqtt, MQTT_NAME FEED2);
 
-//Publica datos en las queue
-Adafruit_MQTT_Publish botonOn0ff2 = Adafruit_MQTT_Publish(&mqtt, MQTT_NAME FEED1);
-Adafruit_MQTT_Publish botonOn0ff3 = Adafruit_MQTT_Publish(&mqtt,MQTT_NAME FEED2);
-
 //Definimos tiempo y las variables volatiles
 unsigned long tiempo;
 volatile int EstadoT1 = HIGH;
