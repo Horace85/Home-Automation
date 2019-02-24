@@ -4,13 +4,13 @@
 #include <Bounce2.h>
 
 
-#define WIFI_SSID  "SyH"
-#define WIFI_PASS "a1a2a3a4a5a6"
+#define WIFI_SSID  "SSID"
+#define WIFI_PASS "PASSWORD"
 
 #define MQTT_SERV "io.adafruit.com"
 #define MQTT_PORT 1883
-#define MQTT_NAME "hrico"
-#define MQTT_PASS "08c744131d6543b6826ddb941e5197b5"
+#define MQTT_NAME "USUARIO"
+#define MQTT_PASS "KEY"
 
 //Definimos los Rel1s
 #define Rel1 D0 
@@ -22,8 +22,8 @@
 
 
 //Definimos las variables de los los Feeds:
-#define FEED1 "/f/onoff2"
-#define FEED2 "/f/onoff3"
+#define FEED1 "/f/onoff0"  //Editar con el fed que corresponda
+#define FEED2 "/f/onoff1"  //Editar con el fed que corresponda
 
 //Setup del WiFi y del cliente MQTT
 WiFiClient client;
