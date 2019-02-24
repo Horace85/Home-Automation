@@ -1,8 +1,6 @@
 #include <ESP8266WiFi.h>
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
-#include <Bounce2.h>
-
 
 #define WIFI_SSID  "SSID"
 #define WIFI_PASS "PASSWORD"
