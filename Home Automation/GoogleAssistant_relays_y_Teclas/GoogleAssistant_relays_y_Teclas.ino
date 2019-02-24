@@ -53,7 +53,7 @@ int tecla1 = digitalRead(Tecla1);
 int tecla2 = digitalRead(Tecla2);
 
 
-//Configuramos los callbacks de los feeds
+//Configuramos los callbacks de los feeds y la logica de la accion.
 void onoff2callback(char *onoff2, uint16_t len) {
    if ((char)*onoff2 == '1' && EstadoT1 == HIGH && tecla1 == HIGH ) {
     EstadoT1 = LOW;
