@@ -194,7 +194,6 @@ void loop()
 //Tiempo en el que va a procesar los datos de los callbacks.
   mqtt.processPackets(5000);
 
- //digitalWrite(Rel1, Estado);
  Serial.print("el valor de EstadoT1 es: ");
  Serial.println(EstadoT1);
  Serial.print("el valor de EstadoT2 es: ");
