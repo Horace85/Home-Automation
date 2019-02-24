@@ -1,3 +1,13 @@
+/*
+Control de Relays con MQTT y llaves de punto fisicas, Para automatizacion del hogar.
+
+Contributors:
+   -diegohce
+
+Fecha: 23/02/2019
+Autor: Horacio Rico
+*/
+
 #include <ESP8266WiFi.h>
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
@@ -10,7 +20,7 @@
 #define MQTT_NAME "USUARIO"
 #define MQTT_PASS "KEY"
 
-//Definimos los Rel1s
+//Definimos los Relays
 #define Rel1 D0 
 #define Rel2 D1 
 
@@ -20,8 +30,8 @@
 
 
 //Definimos las variables de los los Feeds:
-#define FEED1 "/f/onoff0"  //Editar con el fed que corresponda
-#define FEED2 "/f/onoff1"  //Editar con el fed que corresponda
+#define FEED1 "/f/onoff0"  //Editar con el feed que corresponda
+#define FEED2 "/f/onoff1"  //Editar con el feed que corresponda
 
 //Setup del WiFi y del cliente MQTT
 WiFiClient client;
@@ -35,7 +45,7 @@ Adafruit_MQTT_Subscribe onoff3 = Adafruit_MQTT_Subscribe(&mqtt, MQTT_NAME FEED2)
 Adafruit_MQTT_Publish botonOn0ff2 = Adafruit_MQTT_Publish(&mqtt, MQTT_NAME FEED1);
 Adafruit_MQTT_Publish botonOn0ff3 = Adafruit_MQTT_Publish(&mqtt,MQTT_NAME FEED2);
 
-
+//Definimos tiempo y las variables volatiles
 unsigned long tiempo;
 volatile int EstadoT1 = HIGH;
 volatile int EstadoT2 = HIGH;
@@ -43,6 +53,7 @@ int tecla1 = digitalRead(Tecla1);
 int tecla2 = digitalRead(Tecla2);
 
 
+//Configuramos los callbacks de los feeds
 void onoff2callback(char *onoff2, uint16_t len) {
    if ((char)*onoff2 == '1' && EstadoT1 == HIGH && tecla1 == HIGH ) {
     EstadoT1 = LOW;
@@ -87,7 +98,7 @@ void onoff3callback(char *onoff3, uint16_t len) {
   Serial.println(EstadoT2);
 }
 
-
+//Configuramos la funcion de cambio, para cuando detecte una alteracion en el pin de la tecla
 void CambioT1() {
   if(millis() - tiempo > 150){
    EstadoT1 = !EstadoT1 ;
@@ -165,13 +176,14 @@ void setup()
   digitalWrite(Rel1,HIGH);
   digitalWrite(Rel2,HIGH);
 
-//Botones como Entrada y que inicien apagados:  
+//Teclas en modo entrada con pullup, tambien definimos un valor para la var: tiempo  
   pinMode(Tecla1, INPUT_PULLUP);
   pinMode(Tecla2, INPUT_PULLUP);
   tiempo = 0;
   onoff2.setCallback(onoff2callback);
   onoff3.setCallback(onoff3callback);
 
+//definimos las interrupciones
   attachInterrupt(digitalPinToInterrupt(Tecla1), CambioT1, CHANGE);
   attachInterrupt(digitalPinToInterrupt(Tecla2), CambioT2, CHANGE);
   
@@ -183,7 +195,7 @@ void loop()
 {
   MQTT_connect();
 
-
+//Tiempo en el que va a procesar los datos de los callbacks.
   mqtt.processPackets(5000);
 
  //digitalWrite(Rel1, Estado);
