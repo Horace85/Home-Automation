@@ -55,9 +55,6 @@ Este proyecto permite la automatización del hogar mediante el control de relays
 - ⚠️ **No responde a comandos MQTT:** Asegúrate de que la cuenta de Adafruit IO esté configurada correctamente.
 - ⚠️ **Los relays no funcionan:** Revisa las conexiones eléctricas y la alimentación del circuito.
 
-## 📜 Licencia
-Este proyecto es de código abierto bajo la licencia MIT.
-
 ---
 
 📧 Para consultas, contacta con **Horacio Rico** en GitHub.
